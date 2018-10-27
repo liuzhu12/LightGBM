@@ -69,7 +69,7 @@ fi
 
 if [[ $TASK == "sdist" ]]; then
     cd $BUILD_DIRECTORY/python-package && python setup.py sdist || exit -1
-    pip install --user $BUILD_DIRECTORY/python-package/dist/lightgbm-$LGB_VER.tar.gz --install-option=--nomp -v && cat /Users/travis/LightGBM_compilation.log || exit -1
+    pip install --user $BUILD_DIRECTORY/python-package/dist/lightgbm-$LGB_VER.tar.gz -v || exit -1
     if [[ $AZURE == "true" ]]; then
         cp $BUILD_DIRECTORY/python-package/dist/lightgbm-$LGB_VER.tar.gz $BUILD_ARTIFACTSTAGINGDIRECTORY
     fi
@@ -89,7 +89,7 @@ elif [[ $TASK == "bdist" ]]; then
             cp dist/lightgbm-$LGB_VER-py2.py3-none-manylinux1_x86_64.whl $BUILD_ARTIFACTSTAGINGDIRECTORY
         fi
     fi
-    pip install --user $BUILD_DIRECTORY/python-package/dist/*.whl || exit -1
+    pip install --user $BUILD_DIRECTORY/python-package/dist/*.whl --install-option=--nomp && cat /Users/travis/LightGBM_compilation.log || exit -1
     pytest $BUILD_DIRECTORY/tests || exit -1
     exit 0
 fi
