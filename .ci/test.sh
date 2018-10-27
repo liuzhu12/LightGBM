@@ -89,7 +89,7 @@ elif [[ $TASK == "bdist" ]]; then
             cp dist/lightgbm-$LGB_VER-py2.py3-none-manylinux1_x86_64.whl $BUILD_ARTIFACTSTAGINGDIRECTORY
         fi
     fi
-    pip install --user $BUILD_DIRECTORY/python-package/dist/*.whl --install-option=--nomp && cat /Users/travis/LightGBM_compilation.log || exit -1
+    pip install --user $BUILD_DIRECTORY/python-package/dist/*.whl --install-option=--nomp || exit -1
     pytest $BUILD_DIRECTORY/tests || exit -1
     exit 0
 fi
