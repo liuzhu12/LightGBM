@@ -89,8 +89,7 @@ elif [[ $TASK == "bdist" ]]; then
             cp dist/lightgbm-$LGB_VER-py2.py3-none-manylinux1_x86_64.whl $BUILD_ARTIFACTSTAGINGDIRECTORY
         fi
     fi
-    pip install --user $BUILD_DIRECTORY/python-package/dist/*.whl --install-option=--nomp
-    cat /Users/vsts/LightGBM_compilation.log
+    pip install --user $BUILD_DIRECTORY/python-package/dist/*.whl || exit -1
     pytest $BUILD_DIRECTORY/tests || exit -1
     exit 0
 fi
@@ -119,7 +118,7 @@ if [[ $TASK == "mpi" ]]; then
 elif [[ $TASK == "gpu" ]]; then
     cmake -DUSE_GPU=ON -DOpenCL_INCLUDE_DIR=$AMDAPPSDK_PATH/include/ ..
 else
-    cmake ..
+    cmake -DUSE_OPENMP=OFF ..
 fi
 
 make _lightgbm -j4 || exit -1
