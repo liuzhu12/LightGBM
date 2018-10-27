@@ -134,7 +134,6 @@ if [[ $TASK == "regular" ]]; then
             cp $BUILD_DIRECTORY/lib_lightgbm.so $BUILD_ARTIFACTSTAGINGDIRECTORY/lib_lightgbm.so
         fi
     fi
-    conda install -y -n $CONDA_ENV notebook
     cd $BUILD_DIRECTORY/examples/python-guide
     sed -i'.bak' '/import lightgbm as lgb/a\
 import matplotlib\
@@ -142,4 +141,7 @@ matplotlib.use\(\"Agg\"\)\
 ' plot_example.py  # prevent interactive window mode
     sed -i'.bak' 's/graph.render(view=True)/graph.render(view=False)/' plot_example.py
     for f in *.py; do python $f || exit -1; done  # run all examples
+    cd $BUILD_DIRECTORY/examples/python-guide/notebooks
+    conda install -y -n $CONDA_ENV notebook
+    for f in *.ipynb; do jupyter nbconvert --to notebook --execute --inplace $f || exit -1; done  # run all notebooks
 fi
