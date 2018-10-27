@@ -134,6 +134,7 @@ if [[ $TASK == "regular" ]]; then
             cp $BUILD_DIRECTORY/lib_lightgbm.so $BUILD_ARTIFACTSTAGINGDIRECTORY/lib_lightgbm.so
         fi
     fi
+    conda install -y -n $CONDA_ENV notebook
     cd $BUILD_DIRECTORY/examples/python-guide
     sed -i'.bak' '/import lightgbm as lgb/a\
 import matplotlib\
