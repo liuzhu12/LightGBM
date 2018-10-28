@@ -22,7 +22,12 @@ RUN locale-gen $LANG \
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang-3.9 \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main" \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+    clang-6.0 \
  && rm -rf /var/lib/apt/lists/*
 
 # Install CMake
