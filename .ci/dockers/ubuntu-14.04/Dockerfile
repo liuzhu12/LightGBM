@@ -22,6 +22,7 @@ RUN locale-gen $LANG \
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     build-essential \
+    clang++-6.0 \
  && rm -rf /var/lib/apt/lists/*
 
 # Install CMake
