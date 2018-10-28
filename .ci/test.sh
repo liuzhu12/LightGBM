@@ -118,7 +118,7 @@ if [[ $TASK == "mpi" ]]; then
 elif [[ $TASK == "gpu" ]]; then
     cmake -DUSE_GPU=ON -DOpenCL_INCLUDE_DIR=$AMDAPPSDK_PATH/include/ ..
 else
-    cmake ..
+    cmake -DUSE_OPENMP=OFF ..
 fi
 
 make _lightgbm -j4 || exit -1
