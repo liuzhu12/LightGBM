@@ -27,6 +27,8 @@ if [[ $OS_NAME == "macos" ]]; then
 else  # Linux
     if [[ $AZURE == "true" ]] && [[ $COMPILER == "clang" ]]; then
         sudo apt-get update
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-5.0 100
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-5.0 100
         sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-6.0 100
         sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-6.0 100
 #        sudo apt-get install libomp-dev
