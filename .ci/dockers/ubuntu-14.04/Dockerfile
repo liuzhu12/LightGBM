@@ -24,7 +24,9 @@ RUN apt-get update \
     build-essential \
  && rm -rf /var/lib/apt/lists/*
 
-RUN apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main" \
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test \
+ && wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - \
+ && apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main" \
  && apt-get update \
  && apt-get install -y --no-install-recommends \
     clang-6.0 \
