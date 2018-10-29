@@ -26,6 +26,7 @@ if [[ $OS_NAME == "macos" ]]; then
     fi
 else  # Linux
     if [[ $AZURE == "true" ]] && [[ $COMPILER == "clang" ]]; then
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
         sudo apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main"
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends clang-6.0
