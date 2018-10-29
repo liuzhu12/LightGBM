@@ -26,7 +26,9 @@ if [[ $OS_NAME == "macos" ]]; then
     fi
 else  # Linux
     if [[ $AZURE == "true" ]] && [[ $COMPILER == "clang" ]]; then
+        sudo apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main"
         sudo apt-get update
+        sudo apt-get install -y --no-install-recommends clang-6.0
         sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.9 100
         sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.9 100
         sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-6.0 100
