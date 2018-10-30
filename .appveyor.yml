@@ -37,9 +37,9 @@ install:
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%\python-package
   - IF "%COMPILER%"=="MINGW" (
-    python setup.py install --mingw)
+    python setup.py install --mingw --nomp)
     ELSE (
-    python setup.py install)
+    python setup.py install --nomp)
 
 test_script:
   - pytest %APPVEYOR_BUILD_FOLDER%\tests\python_package_test
